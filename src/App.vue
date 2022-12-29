@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <!-- SIDEBAR -->
+    
     <Sidebar/>
     <router-view />
   </div>
@@ -24,7 +24,8 @@ import Sidebar from './components/Sidebar.vue';
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Fira sans', sans-serif;
+	// font-family: 'Fira sans', sans-serif;
+	font-family: FiraSans;	// используем глобально шрифт FiraSans
 }
 body {
 	background: var(--light);
@@ -45,5 +46,12 @@ button {
 			padding-left: 6rem;
 		}
  	}
+ }
+ 
+// Подключаем локадьный шрифт
+ @font-face {
+	font-family: FiraSans;
+	src: local(FiraSans),
+	 url(./fonts/Fira_Sans/FiraSans-Regular.ttf) format("truetype");
  }
 </style>

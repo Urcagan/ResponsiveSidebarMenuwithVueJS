@@ -8,6 +8,31 @@
                 <span class="material-icons">keyboard_double_arrow_right</span>
             </button>
         </div>
+
+        <h3>Menu</h3>
+        <div class="menu">
+            <router-link class="button" to="/">
+                <span class="material-icons">home</span>
+                <span class="text">Home</span>
+            </router-link>
+            
+            <router-link class="button" to="/about">
+                <span class="material-icons">visibility</span>
+                <span class="text">About</span>
+            </router-link>
+
+            <router-link class="button" to="/">
+                <span class="material-icons">group</span>
+                <span class="text">Team</span>
+            </router-link>
+
+            <router-link class="button" to="/">
+                <span class="material-icons">email</span>
+                <span class="text">Contact</span>
+            </router-link>
+
+        </div>
+
     </aside>
 </template>
 
@@ -71,6 +96,15 @@ aside {
         }
     }
 
+    h3, .button .text {     // Скрыть надписи на меню
+        opacity: 0;
+        transition: 0.3s ease-out;
+    }
+
+    .menu {
+        margin: 0 -1rem;
+    }
+
     &.is-expanded {                         // свойства в меню в развернутом полажении
         width: var(--sidebar-width);
 
@@ -79,6 +113,10 @@ aside {
             .menu-toggle {
                 transform: rotate(-180deg); // поворот на 180 градусов сртелки
             }
+        }
+
+        h3, .button .text {     // Показать надписи на меню
+            opacity: 1;
         }
     }   
 
