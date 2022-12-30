@@ -21,28 +21,40 @@
                 <span class="text">About</span>
             </router-link>
 
-            <router-link class="button" to="/">
+            <router-link class="button" to="/team">
                 <span class="material-icons">group</span>
                 <span class="text">Team</span>
             </router-link>
 
-            <router-link class="button" to="/">
+            <router-link class="button" to="/contact">
                 <span class="material-icons">email</span>
                 <span class="text">Contact</span>
             </router-link>
-
         </div>
 
+        <div class="flex"></div>
+        
+        <div class="menu">
+            <router-link class="button" to="/settings">
+                <span class="material-icons">settings</span>
+                <span class="text">Settings</span>
+            </router-link>
+        </div>
+        
     </aside>
 </template>
 
 <script setup> 
 import { ref } from 'vue'
 
-const is_expanded = ref(false)
+const is_expanded = ref(localStorage.getItem("is_expanded") === "true") // Чтение состояния из переменной localStorage
 
+// Проверка состояния меню и его изменение на противоположное
 const ToggleMenu = () => {
-    is_expanded.value = !is_expanded.value
+    is_expanded.value = !is_expanded.value                      // запсиать в переменную is_expended противопложное значение 
+
+    localStorage.setItem("is_expanded", is_expanded.value)      // поместить текущее значение переменной в  localStorage
+//                                                                 это необходимо для запоминания состония при перезагрузке страницы
 }
 </script>
 
@@ -52,7 +64,7 @@ aside {
     flex-direction: column;
 
     width: calc(2rem + 32px);
-    min-height: 100vh;
+    min-height: 100vh;          // устанавливает минимальную высоту элемента
     overflow: hidden;
     padding: 1rem;
 
@@ -60,6 +72,11 @@ aside {
     color: var(--light);
 
     transition: 0.2s ease-out;
+
+    .flex {     //  Настройка прибивает к низу все элементы после этого параметра
+        flex: 1 1 0;    // Порядок свойств flex-grow | flex-shrink | flex-basis
+        // border: 1px solid #ece89d;
+    }
 
     .logo {
         margin-bottom: rem;
@@ -113,6 +130,7 @@ aside {
         margin: 0 -1rem;
 
         .button {                           // Настрройка кнопок внутри меню
+            // border: 1px solid #ece89d;
             display: flex;
             align-items: center;            // положение текста кнопок по центру
             text-decoration: none;          // Убрать подчеркивание на тексте (вид гипер ссылки)
@@ -136,12 +154,17 @@ aside {
                 transition: 0.2s ease-out;
             }
 
-            &:hover, .router-link-exact-active {
+            &:hover, &.router-link-exact-active {
                 background-color:  var(--dark-alt); // Подсветка заднего фона пунктов меню при наведении курсора
 
                 .material-icons, .text {            // Изменение цвета текста и иконки при наведений курсора
                     color: var(--primary);
                 }
+            }
+
+            // 
+            &.router-link-exact-active {                // Для эдемента со свойством ".router-link-exact-active" 
+                border-right: 5px solid var(--primary);
             }
        }
     }
@@ -161,7 +184,7 @@ aside {
         }
         .menu {
             .material-icons {
-                margin-right: 1rem;         // Отсеуп текста от иконки
+                margin-right: 1rem;         // Отступ текста от иконки. Применение свойства в данном месте дает эффект плавного смещения
             }
         }
     }   
